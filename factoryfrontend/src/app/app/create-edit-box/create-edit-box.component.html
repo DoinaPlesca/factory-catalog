@@ -1,0 +1,28 @@
+<div mat-dialog-title>
+  <h1>Box Form</h1>
+</div>
+
+<ion-list>
+  <ion-item>
+    <ion-input [formControl]=" createEditBoxForm.controls.boxName" label="Name"></ion-input>
+    <div *ngIf="! createEditBoxForm.controls.boxName.valid">Box name must be 1 character or more</div>
+  </ion-item>
+  <ion-item>
+    <ion-input [formControl]=" createEditBoxForm.controls.description" label="Description"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input [formControl]=" createEditBoxForm.controls.size" label="Size"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input [formControl]=" createEditBoxForm.controls.price" label="Product price"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input [formControl]=" createEditBoxForm.controls.imageUrl" label="Image"></ion-input>
+  </ion-item>
+  <ion-img [formControl]=" createEditBoxForm.controls.imageUrl" ></ion-img>
+  <ion-item>
+    <ion-button [disabled]="createEditBoxForm.invalid" (click)="saveForm()">Save</ion-button>
+    
+  </ion-item>
+</ion-list>
+

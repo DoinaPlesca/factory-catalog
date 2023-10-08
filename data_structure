@@ -1,0 +1,13 @@
+create table factory_catalog.boxes
+(
+    boxid       serial
+        primary key,
+    boxname     varchar(255) not null,
+    description text,
+    size        varchar(50)  not null,
+    price       integer      not null,
+    imageurl    text
+);
+
+alter table factory_catalog.boxes
+    owner to gewhlkle;
