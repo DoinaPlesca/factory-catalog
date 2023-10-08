@@ -1,13 +1,14 @@
+<ion-content>
+  <ion-title> Products </ion-title>
+  <ion-searchbar
+    color="primary"
+    type="search"
+    (ionInput)="filterBoxes($event.target)"
+    placeholder="Search"
+  ></ion-searchbar>
 
-<ion-content >
-  <link rel="stylesheet"  href="feed-box.component.scss">
-  <ion-title  >
-   Products
-  </ion-title>
-  <ion-searchbar color="primary" type="search"   placeholder="Search"></ion-searchbar>
-
-  <ion-fab slot="fixed" vertical="top" horizontal="start">
-    <ion-fab-button (click)="openCreateModal()" fill="clear">
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="ion-margin-bottom ion-margin-end" >
+    <ion-fab-button id="open-modal"  fill="clear">
       <ion-icon name="add" size="small"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -15,32 +16,44 @@
   <ion-row class="header-row">
     <ion-col size=""> Image</ion-col>
     <ion-col size="2"> Name</ion-col>
-    <ion-col size="2" > Description</ion-col>
+    <ion-col size="2"> Description</ion-col>
     <ion-col size="2">Size</ion-col>
     <ion-col size="2">Price</ion-col>
     <ion-col size="2"> Action</ion-col>
   </ion-row>
 
-  <ion-row class = "table-content" *ngFor="let box of state.boxes">
-    <ion-col size="2">
-      <ion-img [src]="box.imageUrl" ></ion-img>
-    </ion-col>
-    <ion-col size="2">{{box.boxName}}</ion-col>
-    <ion-col size="2">{{box.description}}</ion-col>
-    <ion-col size="2">{{box.size}}</ion-col>
-    <ion-col size="2">{{box.price}}</ion-col>
-    <ion-col size="2">
-      <ion-button size="small"(click)="selectAndEditBox(box)"fill="clear">
+  <ion-content>
+    <ion-row class="table-content" *ngFor="let box of getDisplayedBoxes()">
+      <ion-col size="2">
+        <ion-img [src]="box.imageUrl"></ion-img>
+      </ion-col>
+      <ion-col size="2">{{ box.boxName }}</ion-col>
+      <ion-col size="2">{{ box.description }}</ion-col>
+      <ion-col size="2">{{ box.size }}</ion-col>
+      <ion-col size="2">{{ box.price }}</ion-col>
+      <ion-col size="2">
+        <ion-button
+          size="small"
+          (click)="navigateToOwnPage(box.boxId)"
+          fill="clear"
+        >
           <ion-icon name="pencil" size="small"></ion-icon>
         </ion-button>
 
+        <ion-button
+          size="small"
+          color="danger"
+          (click)="deleteBox(box.boxId)"
+          fill="clear"
+        >
+          <ion-icon name="trash" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
 
-      <ion-button size="small" color="danger" (click)="deleteBox(box.boxId)" fill="clear">
-        <ion-icon name="trash" slot="icon-only"></ion-icon>
-      </ion-button>
-
-
-    </ion-col>
-  </ion-row>
+    <ng-container *ngIf="getDisplayedBoxes().length === 0">
+      <ion-col size="2">NO SEARCH WAS FOUND</ion-col>
+    </ng-container>
+  </ion-content>
+  
 </ion-content>
-

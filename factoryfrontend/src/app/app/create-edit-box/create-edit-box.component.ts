@@ -33,7 +33,6 @@ export class CreateEditBoxComponent  implements OnInit {
     public http: HttpClient,
     public state : State,
     public toastController : ToastController,
-    @Inject(MAT_DIALOG_DATA) public data: any,
     public service : ServicesComponent
 
   ) {
@@ -42,17 +41,18 @@ export class CreateEditBoxComponent  implements OnInit {
       description: '',
       size: '',
       price: '',
-      imageUrl: '',
+      imageUrl: 'https://plus.unsplash.com/premium_photo-1661347900107-eee09e9ae234?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Ym94fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
     });
 
   }
-
-  ngOnInit() {
-    this.createEditBoxForm.patchValue(this.data)
+  ngOnInit(): void {
+   
   }
 
-
   async saveForm() {
+
+    // TODO:  before saving the form, we need to check if the form is valid
+
     try{
       const observable = this.http.post<ResponseDto<Box>>(environment.baseUrl + '/catalog/boxes', this. createEditBoxForm.getRawValue())
 
@@ -75,44 +75,20 @@ export class CreateEditBoxComponent  implements OnInit {
         toast.present();
       }
     }
-
   }
 
-  async updateBox(boxId: number) {
-    try {
 
-      const observable = this.http.put<ResponseDto<Box>>(
-          `${environment.baseUrl}/catalog/boxes/${boxId}`,
-          this.createEditBoxForm.value
-      );
-
-      const response = await firstValueFrom(observable);
-
-      if (response.responseData) {
-        const index = this.state.boxes.findIndex(box => box.boxId === boxId);
-        if (index !== -1) {
-          this.state.boxes[index] = response.responseData;
-        }
-      }
-
-      const toast = await this.toastController.create({
-        message: 'Box was successfully updated',
-        duration: 1233,
-        color: 'success'
-      });
-      toast.present();
-      this.modalController.dismiss();
-
-    } catch (e) {
-      if (e instanceof HttpErrorResponse) {
-        const toast = await this.toastController.create({
-          message: e.error.messageToClient,
-          color: 'danger'
-        });
-        toast.present();
-      }
-    }
+  cancel() {
+    this.modalController.dismiss(null, 'cancel');
   }
+
+  confirm() {
+    this.modalController.dismiss('confirm');
+
+    // method for createing box from service 
+  }
+
+
   closeList() {
     this.modalController.dismiss();
   }

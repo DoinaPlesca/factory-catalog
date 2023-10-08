@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { FeedBoxComponent} from "./app/feed-box/feed-box.component";
+import { BoxDetailIdComponent } from './box-detail-id/box-detail-id.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path:'boxes',
     component : FeedBoxComponent
+  },
+  {
+    path:'boxes/:id',
+    component : BoxDetailIdComponent
   }
 ];
 
