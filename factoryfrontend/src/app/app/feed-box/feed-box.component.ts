@@ -3,11 +3,12 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {firstValueFrom} from "rxjs";
 import {Box, ResponseDto} from "../../../models";
-import {ModalController, ToastController} from "@ionic/angular";
+import {ModalController, SearchbarChangeEventDetail, ToastController} from "@ionic/angular";
 import {State} from "../../../state";
 import {CreateEditBoxComponent} from "../create-edit-box/create-edit-box.component";
 import {ServicesComponent} from "../services/services.component";
 import {MatDialog} from "@angular/material/dialog";
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -19,18 +20,32 @@ import {MatDialog} from "@angular/material/dialog";
 })
 
 export class FeedBoxComponent implements OnInit {
+
   searchTerm: string = '';
-  boxes: any[] = [];
+  boxes: Box[] = [];
   selectedBox: any;
+  filteredBoxes: Box[] = [];
 
 
   constructor
-  (public http: HttpClient,
-   public modalController: ModalController,
+  (private http: HttpClient,
+   private modalController: ModalController,
    public state: State,
-   public toastController: ToastController,
-   public service: ServicesComponent,
-   public dialog: MatDialog) {
+   private toastController: ToastController,
+   private service: ServicesComponent,
+   private dialog: MatDialog,
+   private router: Router,
+   private boxService: ServicesComponent,
+   private route: ActivatedRoute
+   ) {
+    this.route.queryParams.subscribe((queryParams) => {
+      if (queryParams['refresh'] === 'true') {
+        // Refresh the boxes data
+        this.fetchBoxes();
+      }
+    });
+  
+    
   }
 
  /* async searchBoxes() {
@@ -64,30 +79,16 @@ export class FeedBoxComponent implements OnInit {
 
 
   async fetchBoxes() {
-    try {
-      const result = await firstValueFrom(
-          this.http.get<ResponseDto<Box[]>>(environment.baseUrl + '/factory/catalog')
-      );
-
-      this.state.boxes = result.responseData || [];
-
-      const toast = await this.toastController.create({
-        message: result.messageToClient,
-        duration: 2000,
-      });
-      toast.present();
-    } catch (error) {
-      const toast = await this.toastController.create({
-        message:
-            'Error fetching boxes. Please try again later.',
-        duration: 2000,
-      });
-      toast.present();
-    }
+    await this.boxService.getBoxes();
   }
 
   ngOnInit(): void {
-    this.fetchBoxes();
+   this.fetchBoxes();
+  }
+
+
+  navigateToOwnPage(boxId: number | undefined) {
+    this.router.navigate(['/boxes', boxId]);
   }
 
   async deleteBox(boxId: number | undefined) {
@@ -114,31 +115,33 @@ export class FeedBoxComponent implements OnInit {
     }
   }
 
-  openCreateModal() {
-    const dialogRef = this.dialog.open(CreateEditBoxComponent, {
-      data: null,
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      // Handle the result when the dialog is closed, if needed.
-    });
-  }
-
-  selectAndEditBox(box: any) {
-    this.selectedBox = box;
-
-    if (this.selectedBox) {
-      const dialogRef = this.dialog.open(CreateEditBoxComponent, {
-        data: this.selectedBox,
+  filterBoxes(event: EventTarget) {
+    this.searchTerm = (event as SearchbarChangeEventDetail).value;
+ 
+    if (this.searchTerm) {
+      this.filteredBoxes = this.state.boxes.filter((box) => {
+        return (
+          (box.boxName &&
+            box.boxName.toLowerCase().includes(this.searchTerm.toLowerCase())) ||
+          (box.description &&
+            box.description.toLowerCase().includes(this.searchTerm.toLowerCase())) ||
+          (box.size && box.size.toLowerCase().includes(this.searchTerm.toLowerCase()))
+        );
       });
-
-      dialogRef.afterClosed().subscribe(result => {
-        // Handle the result when the dialog is closed, if needed.
-      });
+    } else {
+      // If the search term is empty, show all boxes
+      this.filteredBoxes = this.state.boxes;
     }
   }
 
-
+  getDisplayedBoxes() {
+    if (this.searchTerm === '') {
+      return this.state.boxes;
+    } else {
+      return this.filteredBoxes.length > 0 ? this.filteredBoxes : [];
+    }
+  }
+  
 
 
 }

@@ -5,9 +5,6 @@ export class Box {
   size ?: string;
   price ?: number ;
   imageUrl?: string;
-
-
-
 }
 
 export class ResponseDto<T> {

@@ -1,0 +1,63 @@
+<ion-content [fullscreen]="true">
+  <ion-card *ngIf="state.currentBox as box">
+    <ion-toolbar>
+      <ion-title>{{ box.boxName }}</ion-title>
+      <ion-title></ion-title>
+    </ion-toolbar>
+    <img
+      style="height: 250px; width: auto"
+      [src]="
+        box.imageUrl ||
+        'https://ionicframework.com/docs/img/demos/thumbnail.svg'
+      "
+    />
+
+    <ion-list>
+      <form [formGroup]="formGroup" (ngSubmit)="updateForm()">
+        <ion-item>
+          <ion-input
+            formControlName="boxName"
+            type="text"
+            aria-label="Name"
+            label="Name"
+          ></ion-input>
+            <div *ngIf="!formGroup.controls['boxName'].valid">Box name must be 5 characters or more</div>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            formControlName="description"
+            type="text"
+            aria-label="description"
+            label="Description"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            type="text"
+            formControlName="size"
+            aria-label="size"
+            label="Size"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            type="text"
+            formControlName="price"
+            label="Product price"
+            aria-label="price"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            formControlName="imageUrl"
+            label="Product image"
+            aria-label="image"
+            label="Image"
+          ></ion-input>
+        </ion-item>
+
+        <ion-button type="submit">Update</ion-button>
+      </form>
+    </ion-list>
+  </ion-card>
+</ion-content>
