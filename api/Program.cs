@@ -2,6 +2,7 @@ using api.Helper;
 using api.Middleware;
 using infrastructure;
 using infrastructure.Repository;
+using Microsoft.Net.Http.Headers;
 using service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,10 +26,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var frontEndRelativePath = "./../appfrontend/www";
 
-builder.Services.AddSpaStaticFiles(conf => conf.RootPath = frontEndRelativePath);
+var frontEndRelativePath = "./../factoryfrontend/www/";
 
+builder.Services.AddSpaStaticFiles(configuration => { configuration.RootPath = "./../factoryfrontend/www/"; });
 
 builder.Services.AddCors(options =>
 {
@@ -41,10 +42,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-
-
 // Configure the HTTP request pipeline.
-
 app.UseSwagger();
 app.UseSwaggerUI();
 
@@ -55,6 +53,19 @@ app.UseCors(options =>
         .AllowAnyHeader()
         .AllowCredentials();
 });
+
+app.UseSpaStaticFiles(new StaticFileOptions()
+{
+    OnPrepareResponse = ctx =>
+    {
+        const int durationInSeconds = 60 * 60 * 24;
+        ctx.Context.Response.Headers[HeaderNames.CacheControl] =
+            "public,max-age=" + durationInSeconds;
+    }
+});
+
+app.Map("/factoryfrontend",
+    (IApplicationBuilder frontendApp) => { frontendApp.UseSpa(spa => { spa.Options.SourcePath = "./app/www/"; }); });
 
 
 app.UseSpaStaticFiles();

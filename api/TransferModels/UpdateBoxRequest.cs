@@ -4,7 +4,6 @@ namespace api.TransferModels;
 
 public class UpdateBoxRequest
 {
-    public int BoxId { get; set; }
     
     [MinLength(2)] 
     public string BoxName { get; set; }
@@ -16,7 +15,7 @@ public class UpdateBoxRequest
     public string Size { get; set; }
     
     [Required]
-    [Range(0.01, 9999999.99, ErrorMessage = "Price must be this format: 0,00...")]
+    [Range(0, 9999, ErrorMessage = "Price must be this format: 0,00...")]
     public int Price { get; set; }
     
     public string ImageUrl { get; set; }

@@ -23,7 +23,7 @@ public class BoxController : ControllerBase
     }
 
     [HttpGet]
-    [Route("/factory/catalog")]
+    [Route("/catalog/boxes")]
 
     public ResponseDto GetAllBoxes()
     {
@@ -48,7 +48,6 @@ public class BoxController : ControllerBase
     [HttpPut]
     [ValidationModel]
     [Route("/catalog/boxes/{boxId}")]
-
     public ResponseDto UpdateBoxById([FromRoute] int boxId,
         [FromBody] UpdateBoxRequest dto)
     {
@@ -56,7 +55,7 @@ public class BoxController : ControllerBase
         return new ResponseDto()
         {
             MessageToClient = "Successfully updated",
-            ResponseData = _boxService.UpdateBox(dto.BoxId, dto.BoxName, dto.Description, dto.Size, dto.Price,
+            ResponseData = _boxService.UpdateBox(boxId, dto.BoxName, dto.Description, dto.Size, dto.Price,
                 dto.ImageUrl)
         };
     }
@@ -64,10 +63,14 @@ public class BoxController : ControllerBase
     [HttpGet]
     [Route("/catalog/boxes/{boxId}")]
 
-    public Box GetBoxById([FromRoute] int boxId)
+    public ResponseDto GetBoxById([FromRoute] int boxId)
     {
-        var box = _boxService.GetBoxById(boxId);
-        return box;
+        return new ResponseDto()
+        {
+            MessageToClient = $"Successfully fetched box with Id: {boxId}",
+            ResponseData = _boxService.GetBoxById(boxId)
+        };
+        
     }
 
     [HttpDelete]
@@ -82,12 +85,12 @@ public class BoxController : ControllerBase
         };
     }
 
-    [HttpGet]
-    [ValidationModel]
-    [Route("/catalog/boxes")]
-
-    public IEnumerable<BoxFeedQuery> SearchBox([FromQuery] SearchBoxDto searchBoxDto)
-    {
-        return _boxService.SearchBox(searchBoxDto.SearchTerm, searchBoxDto.PageSize);
-    }
+    // [HttpGet]
+    // [ValidationModel]
+    // [Route("/catalog/boxes")]
+    //
+    // public IEnumerable<BoxFeedQuery> SearchBox([FromQuery] SearchBoxDto searchBoxDto)
+    // {
+    //     return _boxService.SearchBox(searchBoxDto.SearchTerm, searchBoxDto.PageSize);
+    // }
 }
