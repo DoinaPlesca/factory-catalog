@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:postgresql://snuffleupagus.db.elephantsql.com:5432/gewhlkle</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="doinaDB" uuid="23caa7e6-4ce1-4feb-ba79-b7c397fcc8cf">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://snuffleupagus.db.elephantsql.com/gewhlkle</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

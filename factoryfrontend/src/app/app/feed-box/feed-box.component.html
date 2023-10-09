@@ -8,7 +8,7 @@
   ></ion-searchbar>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="ion-margin-bottom ion-margin-end" >
-    <ion-fab-button id="open-modal"  fill="clear">
+    <ion-fab-button id="open-modal" data-testid="open-modal-action"  fill="clear">
       <ion-icon name="add" size="small"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -23,7 +23,7 @@
   </ion-row>
 
   <ion-content>
-    <ion-row class="table-content" *ngFor="let box of getDisplayedBoxes()">
+    <ion-row [attr.data-testid]="'row_'+ box.boxName" class="table-content" *ngFor="let box of getDisplayedBoxes()">
       <ion-col size="2">
         <ion-img [src]="box.imageUrl"></ion-img>
       </ion-col>

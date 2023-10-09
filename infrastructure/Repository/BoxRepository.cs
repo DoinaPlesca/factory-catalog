@@ -52,7 +52,7 @@ public class BoxRepository
     {
         const string sql = $@"
             SELECT boxId AS BoxId, boxName, description, size, price, imageUrl
-            AS {nameof(Box.ImageUrl)},body
+            AS {nameof(Box.ImageUrl)}
             FROM factory_catalog.boxes WHERE boxId = @boxId";
 
         using var
@@ -61,7 +61,7 @@ public class BoxRepository
         return conn.QueryFirst<Box>(sql, new { boxId });
     }
 
-    public Box UpdateBox(string boxName, string description, string size, int price, string imageUrl)
+    public Box UpdateBox(int boxId,string boxName, string description, string size, int price, string imageUrl)
     {
         var sql = $@"
             UPDATE factory_catalog.boxes SET boxName = @boxName, description = @description, size = @size, price = @price, imageUrl= @imageUrl
@@ -74,7 +74,7 @@ public class BoxRepository
             ";
         using (var conn = _dataSource.OpenConnection())
         {
-            return conn.QueryFirst<Box>(sql, new { boxName, description, size, price, imageUrl });
+            return conn.QueryFirst<Box>(sql, new { boxId,boxName, description, size, price, imageUrl });
 
         }
     }
