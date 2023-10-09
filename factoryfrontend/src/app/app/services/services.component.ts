@@ -47,6 +47,7 @@ export class ServicesComponent {
       const toast = await this.toastController.create({
         message: 'Error fetching boxes. Please try again later.',
         duration: 2000,
+        color:"danger"
       });
       toast.present();
     }
@@ -65,6 +66,7 @@ export class ServicesComponent {
 
       const toast = await this.toastController.create({
         message: res.messageToClient,
+        color :"success",
         duration: 2000,
       });
       toast.present();
@@ -75,6 +77,7 @@ export class ServicesComponent {
       const toast = await this.toastController.create({
         message: 'Error fetching boxes. Please try again later.',
         duration: 2000,
+        color:"danger"
       });
       toast.present();
     }

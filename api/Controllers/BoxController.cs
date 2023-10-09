@@ -83,13 +83,13 @@ public class BoxController : ControllerBase
             MessageToClient = "Successfully deleted "
         };
     }
-
-     [HttpGet]
-     [ValidationModel]
-     [Route("/catalog/boxes")]
-    
-     public IEnumerable<BoxFeedQuery> SearchBox([FromQuery] SearchBoxDto searchBoxDto)
-     {
-        return _boxService.SearchBox(searchBoxDto.SearchTerm, searchBoxDto.PageSize);
-     }
+     
+     // [HttpGet]
+     // [ValidationModel]
+     // [Route("/catalog/boxes")]
+     //
+     // public IEnumerable<BoxFeedQuery> SearchBox([FromQuery] SearchBoxDto searchBoxDto)
+     // {
+     //    return _boxService.SearchBox(searchBoxDto.SearchTerm, searchBoxDto.PageSize);
+     // }
 }

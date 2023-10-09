@@ -22,7 +22,10 @@ export class BoxDetailIdComponent implements OnInit {
     public http: HttpClient,
     public toastController : ToastController,
     public service : ServicesComponent,
-    private route: ActivatedRoute,private boxService: ServicesComponent,public state: State,private router: Router,public formBuilder: FormBuilder) {
+    private route: ActivatedRoute,private boxService: ServicesComponent,
+    public state: State,
+    private router: Router,
+    public formBuilder: FormBuilder) {
 
       this.formGroup = this.fb.group({
         boxName: ['', [Validators.required, Validators.minLength(5)]],
@@ -54,6 +57,9 @@ export class BoxDetailIdComponent implements OnInit {
 
   updateForm() {
     if (this.formGroup.valid) {
+      console.log(this.formGroup.valid)
+      console.log(this.formGroup.value)
+
       this.boxService.updateBoxById(
         this.box.boxId,
         this.formGroup.value

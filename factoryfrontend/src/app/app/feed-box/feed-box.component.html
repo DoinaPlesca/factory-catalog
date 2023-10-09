@@ -1,5 +1,6 @@
 <ion-content>
-  <ion-title> Products </ion-title>
+  <ion-title> Products
+  </ion-title>
   <ion-searchbar
     color="primary"
     type="search"
@@ -7,8 +8,10 @@
     placeholder="Search"
   ></ion-searchbar>
 
+
+
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="ion-margin-bottom ion-margin-end" >
-    <ion-fab-button id="open-modal"  fill="clear">
+    <ion-fab-button id="open-modal" data-testid="open-modal-action"  fill="clear">
       <ion-icon name="add" size="small"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -23,8 +26,8 @@
   </ion-row>
 
   <ion-content>
-    <ion-row class="table-content" *ngFor="let box of getDisplayedBoxes()">
-      <ion-col size="2">
+    <ion-row [attr.data-testid]="'row_'+ box.boxName" class="table-content" *ngFor="let box of getDisplayedBoxes()">
+      <ion-col size="">
         <ion-img [src]="box.imageUrl"></ion-img>
       </ion-col>
       <ion-col size="2">{{ box.boxName }}</ion-col>
@@ -34,6 +37,7 @@
       <ion-col size="2">
         <ion-button
           size="small"
+          data-testid="open-page-edit"
           (click)="navigateToOwnPage(box.boxId)"
           fill="clear"
         >
@@ -43,6 +47,7 @@
         <ion-button
           size="small"
           color="danger"
+          data-testid="delete-box-action"
           (click)="deleteBox(box.boxId)"
           fill="clear"
         >
@@ -55,5 +60,5 @@
       <ion-col size="2">NO SEARCH WAS FOUND</ion-col>
     </ng-container>
   </ion-content>
-  
+
 </ion-content>

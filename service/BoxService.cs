@@ -30,7 +30,7 @@ public class BoxService
 
     public Box UpdateBox(int boxId, string boxName, string description, string size, int price, string imageUrl)
     {
-        return _boxRepository.UpdateBox(boxName, description, size, price, imageUrl);
+        return _boxRepository.UpdateBox(boxId,boxName, description, size, price, imageUrl);
     }
 
     public bool DeleteBox(int boxId)

@@ -8,12 +8,12 @@ public class CreateNewBoxRequest
 {
     [NotNull]
     [Required]
-    [StringLength(30, MinimumLength = 1)]
+    [StringLength(100, MinimumLength = 5)]
     public string? BoxName { get; set; }
 
     [NotNull]
     [Required]
-    [StringLength(500, MinimumLength = 1)]
+    [StringLength(2000, MinimumLength = 5)]
     public string? Description { get; set; }
 
     [NotNull]

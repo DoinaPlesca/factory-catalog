@@ -19,6 +19,8 @@ export class CreateEditBoxComponent  implements OnInit {
 
   @Output() recordEdited: EventEmitter<void> = new EventEmitter<void>();
 
+  PLACEHOLDER_IMAGE: string = 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.salonlfc.com%2Fwp-content%2Fuploads%2F2018%2F01%2Fimage-not-found-1-scaled-1150x647.png&f=1&nofb=1&ipt=57742facc9cf7c327c76e0af8c43ffc254627689e82cd3701848b2f966fcc0ae&ipo=images';
+
   createEditBoxForm = this.fb.group({
     boxName: ['' , Validators.minLength(1)],
     description : ['' ,  Validators.required],
@@ -41,7 +43,7 @@ export class CreateEditBoxComponent  implements OnInit {
       description: '',
       size: '',
       price: '',
-      imageUrl: 'https://plus.unsplash.com/premium_photo-1661347900107-eee09e9ae234?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8Ym94fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
+      imageUrl: this.PLACEHOLDER_IMAGE,
     });
 
   }

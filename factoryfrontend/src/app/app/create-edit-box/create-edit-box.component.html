@@ -15,27 +15,27 @@
         <ion-list>
           <form [formGroup]="createEditBoxForm" (ngSubmit)="saveForm()">
           <ion-item>
-            <ion-input [formControl]="createEditBoxForm.controls.boxName" label="Name"></ion-input>
+            <ion-input data-testid="box-name-modal"  [formControl]="createEditBoxForm.controls.boxName" label="Name"></ion-input>
             <div *ngIf="! createEditBoxForm.controls.boxName.valid">Box name must be 1 character or more</div>
           </ion-item>
           <ion-item>
-            <ion-input [formControl]=" createEditBoxForm.controls.description" label="Description"></ion-input>
+            <ion-input data-testid="box-name-description"  [formControl]=" createEditBoxForm.controls.description" label="Description"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input [formControl]=" createEditBoxForm.controls.size" label="Size"></ion-input>
+            <ion-input data-testid="box-name-size"  [formControl]=" createEditBoxForm.controls.size" label="Size"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input [formControl]=" createEditBoxForm.controls.price" label="Product price"></ion-input>
+            <ion-input data-testid="box-name-price"  [formControl]=" createEditBoxForm.controls.price" label="Product price"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input [formControl]=" createEditBoxForm.controls.imageUrl" label="Image"></ion-input>
+            <ion-input data-testid="box-name-image-url"  [formControl]=" createEditBoxForm.controls.imageUrl" label="Image"></ion-input>
           </ion-item>
        
           <ion-img
           [src]="createEditBoxForm.get('imageUrl').value"
           ></ion-img>
           <ion-item>
-            <ion-button  [disabled]="createEditBoxForm.invalid" type="submit">Save</ion-button>
+            <ion-button data-testid="create-box-action"  [disabled]="createEditBoxForm.invalid" type="submit">Save</ion-button>
           </ion-item>
         </form>
         </ion-list>
