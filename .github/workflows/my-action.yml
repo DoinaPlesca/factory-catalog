@@ -38,7 +38,7 @@ jobs:
         - name: Run tests once API is running (sleep interval set to 60 seconds)
           run: cd test && sleep 60 && dotnet test
           env:
-            pgconn: ${{secrets.PGCONN}}
+            pgconn: ${{secrets.PG_CONN}}
 
         - name: Shutdown Web API once the tests are done running
           run: kill $API_PID 
