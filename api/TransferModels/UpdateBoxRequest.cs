@@ -4,20 +4,25 @@ namespace api.TransferModels;
 
 public class UpdateBoxRequest
 {
-    
-    [MinLength(2)] 
+    [Required]
+    [MinLength(2)]
     public string BoxName { get; set; }
-    
+
     public string Description { get; set; }
     
-    [Required]
-    [RegularExpression("^(Small|Medium|Large|Extra-large)$")]
-    public string Size { get; set; }
     
     [Required]
-    [Range(0, 9999, ErrorMessage = "Price must be this format: 0,00...")]
+    [RegularExpression(@"^(?i)(small|medium|large|extra-large|[0-9])$")]
+    public string? Size { get; set; }
+    
+
+    [Required(ErrorMessage = "Price is required")]
+    [Range(0, 9999, ErrorMessage = "Price must be between 0 and 9999")]
     public int Price { get; set; }
     
-    public string ImageUrl { get; set; }
-    
+    [Required]
+    [Url]
+    public string? ImageUrl { get; set; }
 }
+
+    

@@ -6,8 +6,7 @@ using infrastructure.QueryModels;
 using Microsoft.AspNetCore.Mvc;
 using service;
 
-namespace api.Controllers;
-
+namespace api.Controllers; 
 
 public class BoxController : ControllerBase
 {
@@ -85,12 +84,12 @@ public class BoxController : ControllerBase
         };
     }
 
-    // [HttpGet]
-    // [ValidationModel]
-    // [Route("/catalog/boxes")]
-    //
-    // public IEnumerable<BoxFeedQuery> SearchBox([FromQuery] SearchBoxDto searchBoxDto)
-    // {
-    //     return _boxService.SearchBox(searchBoxDto.SearchTerm, searchBoxDto.PageSize);
-    // }
+     [HttpGet]
+     [ValidationModel]
+     [Route("/catalog/boxes")]
+    
+     public IEnumerable<BoxFeedQuery> SearchBox([FromQuery] SearchBoxDto searchBoxDto)
+     {
+        return _boxService.SearchBox(searchBoxDto.SearchTerm, searchBoxDto.PageSize);
+     }
 }

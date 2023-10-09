@@ -5,7 +5,6 @@ import { State } from 'src/state';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalController, ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Box } from 'src/models';
 
 @Component({
@@ -23,7 +22,7 @@ export class BoxDetailIdComponent implements OnInit {
     public http: HttpClient,
     public toastController : ToastController,
     public service : ServicesComponent,
-    private route: ActivatedRoute,private boxService: ServicesComponent,public state: State,private router: Router,public formBuilder: FormBuilder) { 
+    private route: ActivatedRoute,private boxService: ServicesComponent,public state: State,private router: Router,public formBuilder: FormBuilder) {
 
       this.formGroup = this.fb.group({
         boxName: ['', [Validators.required, Validators.minLength(5)]],
@@ -38,7 +37,7 @@ export class BoxDetailIdComponent implements OnInit {
       try {
         const boxId = parseInt(this.route.snapshot.paramMap.get('id'));
         this.box = await this.boxService.getBoxById(boxId);
-  
+
         if (this.box) {
           this.formGroup.patchValue({
             boxName: this.box.boxName,
@@ -56,7 +55,7 @@ export class BoxDetailIdComponent implements OnInit {
   updateForm() {
     if (this.formGroup.valid) {
       this.boxService.updateBoxById(
-        this.box.boxId, 
+        this.box.boxId,
         this.formGroup.value
         );
 
