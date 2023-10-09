@@ -37,6 +37,7 @@
       <ion-col size="2">
         <ion-button
           size="small"
+          data-testid="open-page-edit"
           (click)="navigateToOwnPage(box.boxId)"
           fill="clear"
         >
@@ -46,6 +47,7 @@
         <ion-button
           size="small"
           color="danger"
+          data-testid="delete-box-action"
           (click)="deleteBox(box.boxId)"
           fill="clear"
         >

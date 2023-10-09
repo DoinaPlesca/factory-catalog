@@ -57,6 +57,9 @@ export class BoxDetailIdComponent implements OnInit {
 
   updateForm() {
     if (this.formGroup.valid) {
+      console.log(this.formGroup.valid)
+      console.log(this.formGroup.value)
+
       this.boxService.updateBoxById(
         this.box.boxId,
         this.formGroup.value
