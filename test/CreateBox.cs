@@ -3,10 +3,7 @@ using System.Net.Http.Json;
 using Dapper;
 using FluentAssertions;
 using infrastructure.DataModels;
-using Microsoft.Playwright;
-using Microsoft.Playwright.NUnit;
 using Newtonsoft.Json;
-using NUnit.Framework;
 using Tests;
 
 namespace test;
