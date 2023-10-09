@@ -23,5 +23,6 @@
     <ItemGroup>
       <ProjectReference Include="..\infrastructure\infrastructure.csproj" />
     </ItemGroup>
+    
 
 </Project>

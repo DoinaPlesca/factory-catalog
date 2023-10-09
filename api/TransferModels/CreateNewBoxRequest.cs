@@ -8,12 +8,12 @@ public class CreateNewBoxRequest
 {
     [NotNull]
     [Required]
-    [StringLength(30, MinimumLength = 1)]
+    [StringLength(100, MinimumLength = 1)]
     public string? BoxName { get; set; }
 
     [NotNull]
     [Required]
-    [StringLength(500, MinimumLength = 1)]
+    [StringLength(2000, MinimumLength = 1)]
     public string? Description { get; set; }
 
     [NotNull]
@@ -23,7 +23,7 @@ public class CreateNewBoxRequest
 
     [NotNull]
     [Required]
-    [RegularExpression(@"^(?i)(small|medium|large|extra-large|[0-9])$")]
+    [RegularExpression(@"^.+$")]
     public string? Size { get; set; }
 
    

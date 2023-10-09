@@ -44,39 +44,7 @@ export class FeedBoxComponent implements OnInit {
         this.fetchBoxes();
       }
     });
-  
-    
   }
-
- /* async searchBoxes() {
-    try {
-      const result = await this.service.searchBoxes(this.searchTerm, 10).toPromise();
-
-      if (result) {
-        this.boxes = result.filter((box) => {
-              return (box.boxName && box.boxName.toLowerCase().includes(this.searchTerm.toLowerCase())) ||
-                  (box.description && box.description.toLowerCase().includes(this.searchTerm.toLowerCase())) ||
-                  (box.size && box.size.toLowerCase().includes(this.searchTerm.toLowerCase()));
-            }
-        );
-      } else {
-        this.boxes = [];
-      }
-
-      const toast = await this.toastController.create({
-        message: 'Search completed successfully.',
-        duration: 2000,
-      });
-      toast.present();
-    } catch (error) {
-      const toast = await this.toastController.create({
-        message: 'Error searching boxes. Please try again later.',
-        duration: 2000,
-      });
-      toast.present();
-    }
-  } */
-
 
   async fetchBoxes() {
     await this.boxService.getBoxes();
@@ -117,7 +85,7 @@ export class FeedBoxComponent implements OnInit {
 
   filterBoxes(event: EventTarget) {
     this.searchTerm = (event as SearchbarChangeEventDetail).value;
- 
+
     if (this.searchTerm) {
       this.filteredBoxes = this.state.boxes.filter((box) => {
         return (
@@ -141,7 +109,7 @@ export class FeedBoxComponent implements OnInit {
       return this.filteredBoxes.length > 0 ? this.filteredBoxes : [];
     }
   }
-  
+
 
 
 }

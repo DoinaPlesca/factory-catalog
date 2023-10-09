@@ -1,11 +1,14 @@
 <ion-content>
-  <ion-title> Products </ion-title>
+  <ion-title> Products
+  </ion-title>
   <ion-searchbar
     color="primary"
     type="search"
     (ionInput)="filterBoxes($event.target)"
     placeholder="Search"
   ></ion-searchbar>
+
+
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="ion-margin-bottom ion-margin-end" >
     <ion-fab-button id="open-modal" data-testid="open-modal-action"  fill="clear">
@@ -24,7 +27,7 @@
 
   <ion-content>
     <ion-row [attr.data-testid]="'row_'+ box.boxName" class="table-content" *ngFor="let box of getDisplayedBoxes()">
-      <ion-col size="2">
+      <ion-col size="">
         <ion-img [src]="box.imageUrl"></ion-img>
       </ion-col>
       <ion-col size="2">{{ box.boxName }}</ion-col>
@@ -55,5 +58,5 @@
       <ion-col size="2">NO SEARCH WAS FOUND</ion-col>
     </ng-container>
   </ion-content>
-  
+
 </ion-content>

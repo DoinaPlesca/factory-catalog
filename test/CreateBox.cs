@@ -1,6 +1,12 @@
+using System.Net;
+using System.Net.Http.Json;
 using Dapper;
 using FluentAssertions;
 using infrastructure.DataModels;
+using Microsoft.Playwright;
+using Microsoft.Playwright.NUnit;
+using Newtonsoft.Json;
+using NUnit.Framework;
 using Tests;
 
 namespace test;
@@ -19,7 +25,6 @@ public class CreateBox : PageTest
         //ACT
         await Page.GotoAsync(Helper.ClientAppBaseUrl);
         await Page.GetByTestId("open-modal-action").ClickAsync();
-        
         await Page.GetByTestId("box-name-modal").Locator("input").FillAsync(boxName);
         await Page.GetByTestId("box-name-description").Locator("input").FillAsync(description);
         await Page.GetByTestId("box-name-size").Locator("input").FillAsync(size);
@@ -41,10 +46,36 @@ public class CreateBox : PageTest
         };
         
         conn.QueryFirst<Box>("SELECT * FROM factory_catalog.boxes;").Should()
-            .BeEquivalentTo(expected); //Should be equal to article found in DB
+            .BeEquivalentTo(expected); 
     }
 
     //  Testing methods -> 
     
     
+    
+    
+    [TestCase("VinBox", "6 wall", "small",30, "https://coolimage.com/img.jpg")]
+    public async Task BoxCanSuccessfullyBeCreatedFromHttpRequest(string boxName, string description,string size,int price, string imageUrl)
+    
+    {
+        Helper.TriggerRebuild();
+        var testBox = new Box()
+        {
+            BoxId = 1, BoxName = boxName, Description = description, ImageUrl = imageUrl, Size = size,Price = price
+        };
+        
+        var httpResponse = await new HttpClient().PostAsJsonAsync(Helper.ApiBaseUrl + "/boxes", testBox);
+        var boxFromResponseBody =
+            JsonConvert.DeserializeObject<Box>(await httpResponse.Content.ReadAsStringAsync());
+
+
+        //ASSERT
+        await using (var conn = await Helper.DataSource.OpenConnectionAsync())
+        {
+            conn.QueryFirst<Box>("SELECT * FROM factory_catalog.boxes;").Should()
+                .BeEquivalentTo(boxFromResponseBody); 
+        }
+    }
+    
+
 }

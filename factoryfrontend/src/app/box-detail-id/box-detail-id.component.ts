@@ -22,7 +22,10 @@ export class BoxDetailIdComponent implements OnInit {
     public http: HttpClient,
     public toastController : ToastController,
     public service : ServicesComponent,
-    private route: ActivatedRoute,private boxService: ServicesComponent,public state: State,private router: Router,public formBuilder: FormBuilder) {
+    private route: ActivatedRoute,private boxService: ServicesComponent,
+    public state: State,
+    private router: Router,
+    public formBuilder: FormBuilder) {
 
       this.formGroup = this.fb.group({
         boxName: ['', [Validators.required, Validators.minLength(5)]],
