@@ -47,6 +47,8 @@ public class UpdateBox : PageTest
         await Expect(Page.GetByTestId("row_" + boxName)).ToBeVisibleAsync();
     }
     
+    
+    
     //API test: Now we're not using the frontend, so we're "isolating" from the API layer and down (just using HttpClient, no Playwright)
     [TestCase("Chocolate box", "This is test box 1", "https://unboxprofi.at/wp-content/uploads/2022/02/IMG_6111.jpg", "small", 200)]
     [TestCase("Cardboard box", "This is text 30", "https://unboxprofi.at/wp-content/uploads/2022/02/IMG_6111.jpg", "medium", 200)]

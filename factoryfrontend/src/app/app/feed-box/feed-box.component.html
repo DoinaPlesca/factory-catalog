@@ -1,58 +1,74 @@
-<ion-content>
-  <ion-title> Products
-  </ion-title>
-  <ion-searchbar
-    color="primary"
-    type="search"
-    (ionInput)="filterBoxes($event.target)"
-    placeholder="Search"
-  ></ion-searchbar>
 
+<ion-header>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-title class="center-title">Products</ion-title>
+        </ion-col>
+        <ion-col size="6">
+          <ion-searchbar
+            type="search"
+            (ionInput)="filterBoxes($event.target)"
+            placeholder="Search"></ion-searchbar>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
 
-
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end" class="ion-margin-bottom ion-margin-end" >
-    <ion-fab-button id="open-modal" data-testid="open-modal-action"  fill="clear">
+  <ion-fab slot="fixed"
+           vertical="bottom"
+           horizontal="end"
+           class="ion-margin-bottom ion-margin-end" >
+    <ion-fab-button id="open-modal"
+                    data-testid="open-modal-action"
+                    fill="clear">
       <ion-icon name="add" size="small"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <ion-row class="header-row">
-    <ion-col size=""> Image</ion-col>
-    <ion-col size="2"> Name</ion-col>
-    <ion-col size="2"> Description</ion-col>
-    <ion-col size="2">Size</ion-col>
-    <ion-col size="2">Price</ion-col>
-    <ion-col size="2"> Action</ion-col>
-  </ion-row>
-
   <ion-content>
-    <ion-row [attr.data-testid]="'row_'+ box.boxName" class="table-content" *ngFor="let box of getDisplayedBoxes()">
-      <ion-col size="">
+    <ion-row class="header-row">
+      <ion-col class="custom-col image-col" > Image</ion-col>
+      <ion-col  class="custom-col" > Name</ion-col>
+      <ion-col class="custom-col" > Description</ion-col>
+      <ion-col class="custom-col"  >Size</ion-col>
+      <ion-col class="custom-col"  >Price</ion-col>
+      <ion-col class="custom-col" > Action</ion-col>
+    </ion-row>
+
+    <ion-row [attr.data-testid] ="'row_'+ box.boxName"
+            class ="table-content custom-row"
+             *ngFor="let box of getDisplayedBoxes()">
+
+      <ion-col  class="custom-col ">
         <ion-img [src]="box.imageUrl"></ion-img>
       </ion-col>
-      <ion-col size="2">{{ box.boxName }}</ion-col>
-      <ion-col size="2">{{ box.description }}</ion-col>
-      <ion-col size="2">{{ box.size }}</ion-col>
-      <ion-col size="2">{{ box.price }}</ion-col>
-      <ion-col size="2">
+      <ion-col class="custom-col" >{{ box.boxName }}</ion-col>
+      <ion-col class="custom-col" >{{ box.description }}</ion-col>
+      <ion-col class="custom-col" >{{ box.size }}</ion-col>
+      <ion-col class="custom-col"  >{{ box.price }}</ion-col>
+      <ion-col class="custom-col">
+
         <ion-button
+          shape="round"
           size="small"
           data-testid="open-page-edit"
           (click)="navigateToOwnPage(box.boxId)"
           fill="clear"
-        >
-          <ion-icon name="pencil" size="small"></ion-icon>
+        > Update
         </ion-button>
 
-        <ion-button
+        <ion-button shape="round"
           size="small"
           color="danger"
           data-testid="delete-box-action"
           (click)="deleteBox(box.boxId)"
-          fill="clear"
-        >
-          <ion-icon name="trash" slot="icon-only"></ion-icon>
+          >
+          Delete
         </ion-button>
+
       </ion-col>
     </ion-row>
 
@@ -61,4 +77,4 @@
     </ng-container>
   </ion-content>
 
-</ion-content>
+

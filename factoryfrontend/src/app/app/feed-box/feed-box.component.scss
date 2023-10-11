@@ -1,40 +1,54 @@
-
+//
 @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Space+Grotesk:wght@300;500&display=swap');
 
+ion-content {
+  --background: #6D6875;
+  --color: white;
 
+  --border-color: black;
+  --border-width: 4px 0;
+  --border-style: double;
+  --min-height: 80px;
+  --padding-bottom: 20px;
+}
 
-ion-title {
+ion-grid{
+  background: #6D6875;
+  color: #FFCDB2;
+  text-align:start;
+;
   font-family: 'Poppins', sans-serif;
   font-size: 50px;
   font-weight: bold;
-  background-color:lightseagreen;
-  max-height: 50px;
-  margin-top: 20px;
+  max-height: 70px;
+  margin-top: 0;
   border-bottom: 3px solid black;
 
 }
-ion-searchbar {
+ion-title{
+  font-size: 50px;
+}
+
+ion-searchbar{
+  --display: flex;
+  --flex-wrap: nowrap;
+  color: #6D6875;
   margin-top: 10px;
-  margin-left: 400px;
+  margin-left: 80px;
+  margin-right: 10px;
   max-height: 40px;
   max-width: 540px;
-  color : #2bd9ea
+
 }
 
 .header-row {
+  --display: flex;
+  --flex-wrap: nowrap;
   border:  3px solid black;
-  margin-top: 15px;
-  background-color: lightblue;
+  margin-top:0;
+  background-color: #B5838D;
   color: black;
   font-weight: bold;
-  margin-right: 16px;
-}
-.header-row ion-col {
-  border:  2px solid black;
-  padding: 10px;
-}
-.table-content ion-col  {
-  border: 1px solid black;
 
 }
 
@@ -42,16 +56,49 @@ ion-fab {
   margin-top: 68px;
 
 }
-.table-content ion-image {
-  width: 300px;
-  height: 200px;
-  border: 2px solid ;
-  border-radius: 10px;
-  margin: 10px;
-  box-shadow: 2px 2px 5px #888;
+ion-button {
+  --display:flex;
+  --flex-wrap: nowrap;
+  --background:#FFB4A2;
+  --border-color: #000;
+  --border-style: solid;
+  --border-width: 2px;
 }
 
+//
+//.table-content ion-row {
+//  display: flex;
+//  flex-wrap: nowrap;
+//  margin: 1px 0;
+//
+//
+//}
+.custom-col {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border: 1px solid black;
+  height: 90px;
+}
 
+//.custom-row {
+//  display: flex;
+//  flex-wrap: nowrap;
+//  border: 2px solid black;
+//  text-align: center;
+//}
+
+ion-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+
+}
 
 
 

@@ -38,7 +38,7 @@ public class DeleteBox : PageTest
     }
     
     [TestCase("Test delete", "description of boxes", "https://www.unfade.dk/wp-content/uploads/2022/12/Mystery-Box-Sprayer_All_5039_5.jpeg", "small", 10)]
-    public async Task ArticleCanSuccessfullyBeDeletedFromHttpClient(string boxName, string description, string imageUrl, string size,int price)
+    public async Task BoxCanSuccessfullyBeDeletedFromHttpClient(string boxName, string description, string imageUrl, string size,int price)
     {
         //ARRANGE
         Helper.TriggerRebuild();

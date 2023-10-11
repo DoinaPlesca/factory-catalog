@@ -83,8 +83,4 @@ export class ServicesComponent {
     }
   }
 
-  // deleteBox(id: number): Observable<any> {
-  //   const url = environment.baseUrl + '/catalog/boxes';
-  //   return this.http.delete<any>(url);
-  // }
 }

@@ -65,7 +65,7 @@ export class FeedBoxComponent implements OnInit {
       this.state.boxes = this.state.boxes.filter(b => b.boxId != boxId)
       const toast = await this.toastController.create({
         message: 'The article was successfully deleted!',
-        duration: 1233,
+        duration: 1000,
         color: "success"
       })
       toast.present();
@@ -74,12 +74,11 @@ export class FeedBoxComponent implements OnInit {
       if (e instanceof HttpErrorResponse) {
         const toast = await this.toastController.create({
           message: e.error.messageToClient,
-          color: "danger"
+          color: "danger",
+          duration :2000,
         })
         toast.present();
-
       }
-
     }
   }
 
@@ -109,8 +108,6 @@ export class FeedBoxComponent implements OnInit {
       return this.filteredBoxes.length > 0 ? this.filteredBoxes : [];
     }
   }
-
-
 
 }
 
