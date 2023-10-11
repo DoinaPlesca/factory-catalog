@@ -1,7 +1,4 @@
 {
   "name": "factoryfrontend",
-  "integrations": {
-    "capacitor": {}
-  },
   "type": "angular"
 }

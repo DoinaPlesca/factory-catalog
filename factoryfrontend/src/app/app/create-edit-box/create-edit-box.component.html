@@ -1,136 +1,161 @@
-  <ion-modal trigger="open-modal" >
-    <ng-template>
-      <ion-toolbar >
-        <ion-buttons slot="start">
-          <ion-button (click)="cancel()">Cancel</ion-button>
-        </ion-buttons>
-        <ion-title>Create box</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
-        </ion-buttons>
-      </ion-toolbar>
+<ion-modal trigger="open-modal">
+  <ng-template>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="cancel()">Cancel</ion-button>
+      </ion-buttons>
+      <ion-title>Create box</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
 
-      <ion-content class="ion-padding">
-        <form [formGroup]="createEditBoxForm" (ngSubmit)="saveForm()" novalidate>
-          <ion-item lines="full">
-            <ion-label position="floating">Name</ion-label>
-            <ion-input
-              data-testid="box-name-modal"
-              formControlName="boxName"
-              type="text"
-              aria-label="Name"
-            ></ion-input>
-          </ion-item>
+    <ion-content class="ion-padding">
+      <form [formGroup]="createEditBoxForm" (ngSubmit)="saveForm()" novalidate>
+        <ion-item lines="full">
+          <ion-label position="floating">Name</ion-label>
+          <ion-input
+            data-testid="box-name-modal"
+            formControlName="boxName"
+            type="text"
+            aria-label="Name"
+          ></ion-input>
+        </ion-item>
+        <div
+          *ngIf="
+            this.createEditBoxForm.controls?.boxName.touched &&
+            this.createEditBoxForm.controls?.boxName.invalid
+          "
+        >
           <div
-            *ngIf="this.createEditBoxForm.controls?.boxName.touched && this.createEditBoxForm.controls?.boxName.invalid"
+            class="ion-padding"
+            *ngIf="this.createEditBoxForm.controls?.boxName.errors?.['required']"
           >
-            <div
-              class="ion-padding"
-              *ngIf="this.createEditBoxForm.controls?.boxName.errors?.['required']"
-            >
-              <ion-text color="danger">Name is required.</ion-text>
-            </div>
-            <div
-              class="ion-padding"
-              color="danger"
-              *ngIf="this.createEditBoxForm.controls?.boxName.errors?.['minlength']"
-            >
-              <ion-text color="danger">Name should be min 5 chars long.</ion-text>
-            </div>
+            <ion-text color="danger">Name is required.</ion-text>
           </div>
-          <ion-item lines="full">
-            <ion-label position="floating">Description</ion-label>
-            <ion-input
-              formControlName="description"
-              data-testid="box-name-description"
-              aria-label="Description"
-              type="description"
-            ></ion-input>
-          </ion-item>
           <div
-            *ngIf="this.createEditBoxForm.controls?.description.touched && this.createEditBoxForm.controls?.description.invalid"
+            class="ion-padding"
+            color="danger"
+            *ngIf="this.createEditBoxForm.controls?.boxName.errors?.['minlength']"
           >
-            <div
-              class="error ion-padding"
-              *ngIf="errorControl.description.errors?.['required']"
-            >
-              <ion-text color="danger">Description is required.</ion-text>
-            </div>
-            <div class="ion-padding" *ngIf="errorControl.description.errors?.['pattern']">
-              <ion-text color="danger">Please provide valid description.</ion-text>
-            </div>
+            <ion-text color="danger">Name should be min 5 chars long.</ion-text>
           </div>
-          <ion-item lines="full">
-            <ion-label position="floating">Size</ion-label>
-            <ion-input
-              data-testid="box-name-size"
-              formControlName="size"
-              type="text"
-              aria-label="Size"
-              required
-            ></ion-input>
-          </ion-item>
+        </div>
+        <ion-item lines="full">
+          <ion-label position="floating">Description</ion-label>
+          <ion-input
+            formControlName="description"
+            data-testid="box-name-description"
+            aria-label="Description"
+            type="description"
+          ></ion-input>
+        </ion-item>
+        <div
+          *ngIf="
+            this.createEditBoxForm.controls?.description.touched &&
+            this.createEditBoxForm.controls?.description.invalid
+          "
+        >
           <div
-            *ngIf="this.createEditBoxForm.controls?.size.touched && this.createEditBoxForm.controls?.size.invalid"
+            class="error ion-padding"
+            *ngIf="errorControl.description.errors?.['required']"
           >
-            <div
-              class="error ion-padding"
-              *ngIf="errorControl.size.errors?.['required']"
-            >
-              <ion-text color="danger">The box can only have the following sizes: small, medium, large and extra-large!</ion-text>
-            </div>
-            <div
-              class="error ion-padding"
-              *ngIf="errorControl.size.errors?.['pattern']"
-            >
-              <ion-text color="danger">Only small,medium,large,extra-large size allow.</ion-text>
-            </div>
+            <ion-text color="danger">Description is required.</ion-text>
           </div>
-          <ion-item lines="full">
-            <ion-label position="floating">Price</ion-label>
-            <ion-input
-              data-testid="box-name-price"
-              formControlName="price"
-              type="text"
-              aria-label="Price"
-            ></ion-input>
-          </ion-item>
           <div
-            *ngIf="this.createEditBoxForm.controls?.price.touched && this.createEditBoxForm.controls?.price.invalid"
+            class="ion-padding"
+            *ngIf="errorControl.description.errors?.['pattern']"
           >
-            <div
-              class="ion-padding"
-              *ngIf="this.createEditBoxForm.controls?.price.errors?.['required']"
+            <ion-text color="danger"
+              >Please provide valid description.</ion-text
             >
-              <ion-text color="danger">Price is required.</ion-text>
-            </div>
-            <div
-              class="ion-padding"
-              color="danger"
-              *ngIf="this.createEditBoxForm.controls?.price.errors?.['pattern']"
-            >
-              <ion-text color="danger">Price must be a positive number</ion-text>
-            </div>
           </div>
+        </div>
+        <ion-item lines="full">
+          <ion-label position="floating">Size</ion-label>
+          <ion-input
+            data-testid="box-name-size"
+            formControlName="size"
+            type="text"
+            aria-label="Size"
+            required
+          ></ion-input>
+        </ion-item>
+        <div
+          *ngIf="
+            this.createEditBoxForm.controls?.size.touched &&
+            this.createEditBoxForm.controls?.size.invalid
+          "
+        >
+          <div
+            class="error ion-padding"
+            *ngIf="errorControl.size.errors?.['required']"
+          >
+            <ion-text color="danger"
+              >The box can only have the following sizes: small, medium, large
+              and extra-large!</ion-text
+            >
+          </div>
+          <div
+            class="error ion-padding"
+            *ngIf="errorControl.size.errors?.['pattern']"
+          >
+            <ion-text color="danger"
+              >Only small,medium,large,extra-large size allow.</ion-text
+            >
+          </div>
+        </div>
+        <ion-item lines="full">
+          <ion-label position="floating">Price</ion-label>
+          <ion-input
+            data-testid="box-name-price"
+            formControlName="price"
+            type="text"
+            aria-label="Price"
+          ></ion-input>
+        </ion-item>
+        <div
+          *ngIf="
+            this.createEditBoxForm.controls?.price.touched &&
+            this.createEditBoxForm.controls?.price.invalid
+          "
+        >
+          <div
+            class="ion-padding"
+            *ngIf="this.createEditBoxForm.controls?.price.errors?.['required']"
+          >
+            <ion-text color="danger">Price is required.</ion-text>
+          </div>
+          <div
+            class="ion-padding"
+            color="danger"
+            *ngIf="this.createEditBoxForm.controls?.price.errors?.['pattern']"
+          >
+            <ion-text color="danger">Price must be a positive number</ion-text>
+          </div>
+        </div>
 
-          <ion-item>
-            <ion-label class="custom-label" >Image:</ion-label>
-            <ion-input data-testid="box-name-image-url" [formControl]=" createEditBoxForm.controls.imageUrl" ></ion-input>
-          </ion-item>
-          <ion-img
-            [src]="createEditBoxForm.get('imageUrl').value"
-          ></ion-img>
+        <ion-item>
+          <ion-label class="custom-label">Image:</ion-label>
+          <ion-input
+            data-testid="box-name-image-url"
+            [formControl]="createEditBoxForm.controls.imageUrl"
+          ></ion-input>
+        </ion-item>
+        <ion-img [src]="createEditBoxForm.get('imageUrl').value"></ion-img>
 
-            <ion-row>
-            <ion-col>
-                <ion-button  data-testid="create-box-action"
-                             [disabled]="createEditBoxForm.invalid"
-                            type="submit"
-                             expand="block">Save </ion-button>
-            </ion-col>
-          </ion-row>
-        </form>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
-
+        <ion-row>
+          <ion-col>
+            <ion-button
+              data-testid="create-box-action"
+              [disabled]="createEditBoxForm.invalid"
+              type="submit"
+              expand="block"
+              >Save
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>

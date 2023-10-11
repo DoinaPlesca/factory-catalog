@@ -68,7 +68,6 @@ app.Map("/factoryfrontend",
     (IApplicationBuilder frontendApp) => { frontendApp.UseSpa(spa => { spa.Options.SourcePath = "./app/www/"; }); });
 
 
-app.UseSpaStaticFiles();
 app.UseSpa(conf =>
 {
     conf.Options.SourcePath = frontEndRelativePath;

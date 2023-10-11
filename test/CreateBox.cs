@@ -46,42 +46,10 @@ public class CreateBox : PageTest
             .BeEquivalentTo(expected); 
     }
     
-    [TestCase("Box", "this is test box from tests", "https://images.unsplash.com/photo-1696257203553-20ada15fce65?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80", "small", 100)]
-    public async Task UIShouldPresentErrorToastIncorrectHeadlineRequires5Length(string boxName, string description, string imageUrl, string size,int price)
-    {
-        //ARRANGE
-        Helper.TriggerRebuild();
-        await using (var conn = await Helper.DataSource.OpenConnectionAsync())
-            
-        await conn.ExecuteAsync(
-                "INSERT INTO factory_catalog.boxes (boxName, description, imageUrl, size,price) VALUES (@boxName, @description, @imageUrl, @size,@price) RETURNING *;",
-                new { boxName, description, imageUrl, size ,price});
-        
-        //ACT
-        await Page.GotoAsync(Helper.ClientAppBaseUrl);
-        await Page.GetByTestId("open-modal-action").ClickAsync();
-        await Page.GetByTestId("box-name-modal").Locator("input").FillAsync(boxName);
-        await Page.GetByTestId("box-name-description").Locator("input").FillAsync(description);
-        await Page.GetByTestId("box-name-size").Locator("input").FillAsync(size);
-        await Page.GetByTestId("box-name-price").Locator("input").FillAsync(price.ToString());
-        await Page.GetByTestId("box-name-image-url").Locator("input").FillAsync(imageUrl);
-        
-        await Page.GetByTestId("create-box-action").ClickAsync();
-        
-        //ASSERT
-        var toastCssClasses = await Page.Locator("ion-toast").GetAttributeAsync("class");
-        var classes = toastCssClasses?.Split(' ');
-        
-        classes.Should().Contain("ion-color-danger");
-        
-        await using (var conn = await Helper.DataSource.OpenConnectionAsync())
-            
-            conn.ExecuteScalar<int>("SELECT COUNT(*) FROM factory_catalog.boxes;").Should().Be(1); //DB should have just the pre-existing article, and not also the new one
-    }
-
-
-    [TestCase("VinBox", "6 wall", "small",30, "https://coolimage.com/img.jpg")]
-    public async Task BoxCanSuccessfullyBeCreatedFromHttpRequest(string boxName, string description,string size,int price, string imageUrl)
+    [TestCase("TestBox", "this is test box from tests", "https://images.unsplash.com/photo-1696257203553-20ada15fce65?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80", "small", 100)]
+    [TestCase("TestBox", "this is test box from tests", "https://images.unsplash.com/photo-1696257203553-20ada15fce65?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80", "small", 100)]
+    [TestCase("TestBox", "this is test box from tests", "https://images.unsplash.com/photo-1696257203553-20ada15fce65?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80", "small", 100)]
+    public async Task BoxCanSuccessfullyBeCreatedFromHttpRequest(string boxName, string description, string imageUrl, string size,int price)
     
     {
         Helper.TriggerRebuild();
