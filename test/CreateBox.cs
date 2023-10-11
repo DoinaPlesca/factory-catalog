@@ -29,7 +29,7 @@ public class CreateBox : PageTest
         await Page.GetByTestId("box-name-image-url").Locator("input").FillAsync(imageUrl);
 
 
-        await Page.GetByTestId("create-box-action").ClickAsync();
+        await Page.GetByTestId("save-box-action").ClickAsync();
 
 
         //ASSERT
