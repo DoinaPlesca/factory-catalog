@@ -12,8 +12,7 @@ namespace test;
 public class CreateBox : PageTest
 {
     // E2E testing methods -> 
-    [TestCase("Box from UI test API", "this is test box from tests", "https://images.unsplash.com/photo-1696257203553-20ada15fce65?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80", "small", 100)]
-    [TestCase("Box Test api v2", "this is another test", "https://images.unsplash.com/photo-1696621690997-14ebd5519c22?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60", "medium", 300)]
+    [TestCase("BoxBoxBoxTest", "this is another test of box", "https://images.unsplash.com/photo-1696621690997-14ebd5519c22?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60", "small", 300)]
     public async Task BoxCanSuccessfullyBeCreatedFromUi(string boxName, string description, string imageUrl, string size,int price)
     {
         //ARRANGE
@@ -22,6 +21,7 @@ public class CreateBox : PageTest
         //ACT
         await Page.GotoAsync(Helper.ClientAppBaseUrl);
         await Page.GetByTestId("open-modal-action").ClickAsync();
+        
         await Page.GetByTestId("box-name-modal").Locator("input").FillAsync(boxName);
         await Page.GetByTestId("box-name-description").Locator("input").FillAsync(description);
         await Page.GetByTestId("box-name-size").Locator("input").FillAsync(size);
@@ -30,7 +30,7 @@ public class CreateBox : PageTest
 
 
         await Page.GetByTestId("save-box-action").ClickAsync();
-
+        
 
         //ASSERT
         await Expect(Page.GetByTestId("row_" + boxName)).ToBeVisibleAsync();
@@ -44,6 +44,9 @@ public class CreateBox : PageTest
 
         conn.QueryFirst<Box>("SELECT * FROM factory_catalog.boxes;").Should()
             .BeEquivalentTo(expected); 
+        
+        
+        
     }
     
     

@@ -25,7 +25,7 @@ jobs:
             node-version: 18.x.x # version of node to use
 
         - name: Install Angular program dependencies, Angular global CLI + ng build  
-          run: cd factoryfrontend && npm i -g @angular/cli && npm i && ng build -c="development"
+          run: cd factoryfrontend && npm i -g @angular/cli && npm i && ng build 
 
         - name: Build test code and install playwright test browser
           run: cd test && dotnet build && pwsh bin/Debug/net7.0/playwright.ps1 install --with-deps # By using --with-deps, you ensure that the entire Playwright environment, including its dependencies, is set up correctly on your system.
